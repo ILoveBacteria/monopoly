@@ -59,3 +59,9 @@ class UnableToBuildException extends Exception{
         System.out.println("UnableToBuildException");
     }
 }
+
+class BoughtAreaException extends Exception{
+    BoughtAreaException() {
+        System.out.println("BoughtAreaException");
+    }
+}
