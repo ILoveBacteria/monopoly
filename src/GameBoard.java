@@ -5,26 +5,8 @@ public class GameBoard {
     public final int AIRPORT_1 = 3;
     public final int AIRPORT_2 = 11;
     public final int AIRPORT_3 = 20;
-    public final int CINEMA_1 = 4;
-    public final int CINEMA_2 = 15;
-    public final int CINEMA_3 = 22;
     public final int JAIL = 13;
     public final int BANK = 21;
-    public final int ROAD_1 = 5;
-    public final int ROAD_2 = 10;
-    public final int ROAD_3 = 16;
-    public final int PRIZE = 6;
-    public final int TAX = 17;
-    public final int CHANCE_CARD = 24;
-    public final int EMPTY_GREEN_1 = 2;
-    public final int EMPTY_GREEN_2 = 12;
-    public final int EMPTY_YELLOW_1 = 7;
-    public final int EMPTY_YELLOW_2 = 19;
-    public final int EMPTY_RED_1 = 9;
-    public final int EMPTY_RED_2 = 18;
-    public final int EMPTY_BLUE_1 = 14;
-    public final int EMPTY_BLUE_2 = 23;
-
 
     public final double AIRPLANE_TICKET_COST = 50;
     public final double RELEASE_FROM_JAIL_COST = 50;
