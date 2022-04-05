@@ -65,3 +65,15 @@ class BoughtAreaException extends Exception{
         System.out.println("BoughtAreaException");
     }
 }
+
+class MustSellRealEstatesException extends Exception {
+    public MustSellRealEstatesException() {
+        System.out.println("MustSellRealEstatesException");
+    }
+}
+
+class BankruptcyException extends Exception{
+    public BankruptcyException() {
+        System.out.println("BankruptcyException");
+    }
+}
