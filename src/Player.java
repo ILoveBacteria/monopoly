@@ -52,36 +52,28 @@ public class Player {
         asset += rent;
     }
 
-    public boolean payRent(Area area) throws Exception {
+    public void payRent(Area area) throws Exception {
         {
             if (area.getRentPrice() == null)
                 throw new AreaWithoutRentException();
         }
-        if (asset >= area.getRentPrice()) {
+        if (asset > area.getRentPrice()) {
             if (area.getOwner() != null) {
                 area.getOwner().collectRent(area.getRentPrice());
             }
+            asset -= area.getRentPrice();
         } else {
-            Area[] realEstateArr =(Area[]) realEstates.toArray();
-            double inventory = asset;
+            Double balance = asset;
+            boolean canPay = false;
+            Area[] realEstateArr = (Area[]) realEstates.toArray();
             for (int i = 0; i < realEstateArr.length; i++) {
-                inventory += realEstateArr[i].getBuyPrice()/2;
-            }
-            if (inventory < area.getRentPrice()){
-                return false;
-            } else {
-                /*while (true) {
-                    sell(area , null);
-                    if (area.getRentPrice() < asset) {
-                        return true;
-                    } else {
-                        System.out.println("Sell some of your real estates.\n");
-                    }
-                }*/
+                balance += realEstateArr[i].getBuyPrice()/2;
+                if (balance > area.getRentPrice()) {
+                    throw new MustSellRealEstatesException();
+                }
+                throw new BankruptcyException();
             }
         }
-        asset -= area.getRentPrice();
-        return true; //true
     }
 
     public void sell(Area area) throws Exception{

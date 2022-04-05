@@ -108,7 +108,7 @@ public class Main {
                         int locationArea = scanner.nextInt();
 
                         try {
-                            playerTurn.sell(game.getGameBoard().getAreas()[locationArea], null);
+                            playerTurn.sell(game.getGameBoard().getAreas()[locationArea]);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
