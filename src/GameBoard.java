@@ -27,12 +27,14 @@ public class GameBoard {
 
 
     public final double AIRPLANE_TICKET_COST = 50;
-    public final double EMPTY_LAND_RENT_PRICE = 50;
-    public final double BUILDING_COST = 150;
-    public final double BUILDING_RENT_COST = 100;
-    public final double EMPTY_LAND_COST = 100;
-    public final double BUILDING_PERMIT_COST = 100;
     public final double RELEASE_FROM_JAIL_COST = 50;
+    public final double EMPTY_LAND_COST = 100;
+    public final double BUILD_HOUSE_COST = 150;
+    public final double BUILD_HOTEL_COST = 100;
+    public final double EMPTY_LAND_RENT = 50;
+    public final double ADD_HOUSE_RENT_ACCELERATION = 100;
+    public final double ADD_HOTEL_RENT_ACCELERATION = 150;
+
 
 
     private GameBoard() {
