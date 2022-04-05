@@ -150,7 +150,7 @@ public class Player {
         Area[] realEstateArr = (Area[]) realEstates.toArray();
         for (int i = 0; i < realEstateArr.length; i++) {
             if (area instanceof EmptyLand) {
-                if (((EmptyLand) area).getHousesCount() > ((EmptyLand) area).getHousesCount()) {
+                if (((EmptyLand) area).getHousesCount() > ((EmptyLand) realEstateArr[i]).getHousesCount()) {
                     throw new UnbalancedBuildingsCountException();
                 }
             }
