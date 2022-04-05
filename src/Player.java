@@ -170,7 +170,7 @@ public class Player {
                 if (asset < gameBoard.BUILD_HOUSE_COST)
                     throw new InsufficientAssetException();
             }
-            ((EmptyLand) area).setHousesCount(((EmptyLand) area).getHotelsCount() + 1);
+            ((EmptyLand) area).setHousesCount(((EmptyLand) area).getHousesCount() + 1);
             area.setBuyPrice((int) (area.getBuyPrice() + gameBoard.BUILD_HOUSE_COST));
             area.setRentPrice((int) (area.getRentPrice() + gameBoard.ADD_HOUSE_RENT_ACCELERATION));
             asset -= gameBoard.BUILD_HOUSE_COST;
