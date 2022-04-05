@@ -84,21 +84,13 @@ public class Player {
         return true; //true
     }
 
-    public void sell(Area area , Player buyer ) throws Exception{
+    public void sell(Area area) throws Exception{
         {
             if (area.getOwner() != this)
                 throw new UnrelatedUserException();
-            if (buyer instanceof Player)
-                throw new UnrelatedBuyerException();
         }
-
-        if (buyer == null) { //bank
-            this.asset += (area.getBuyPrice() / 2);
-            area.setOwner(null);
-        } else { //other players
-            this.asset += (area.getBuyPrice());
-            area.setOwner((Player) buyer);
-        }
+        this.asset += (area.getBuyPrice() / 2);
+        area.setOwner(null);
         realEstates.remove(area);
     }
 
