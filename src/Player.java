@@ -64,7 +64,6 @@ public class Player {
             asset -= area.getRentPrice();
         } else {
             Double balance = asset;
-            boolean canPay = false;
             Area[] realEstateArr = (Area[]) realEstates.toArray();
             for (int i = 0; i < realEstateArr.length; i++) {
                 balance += realEstateArr[i].getBuyPrice()/2;
@@ -148,6 +147,36 @@ public class Player {
             if (((EmptyLand) area).getHotelsCount() == 1)
                 throw new UnableToBuildException();
         }
+        Area[] realEstateArr = (Area[]) realEstates.toArray();
+        for (int i = 0; i < realEstateArr.length; i++) {
+            if (area instanceof EmptyLand) {
+                if (((EmptyLand) area).getHousesCount() > ((EmptyLand) area).getHousesCount()) {
+                    throw new UnbalancedBuildingsCountException();
+                }
+            }
+        }
+        if (((EmptyLand) area).getHousesCount() == 4) {
+            {
+                if (asset < gameBoard.BUILD_HOTEL_COST)
+                    throw new InsufficientAssetException();
+            }
+            ((EmptyLand) area).setHotelsCount(1);
+            ((EmptyLand) area).setHousesCount(0);
+            area.setBuyPrice((int) (area.getBuyPrice() + gameBoard.BUILD_HOTEL_COST));
+            area.setRentPrice((int) (area.getRentPrice() + gameBoard.ADD_HOTEL_RENT_ACCELERATION));
+            asset -= gameBoard.BUILD_HOTEL_COST;
+        } else {
+            {
+                if (asset < gameBoard.BUILD_HOUSE_COST)
+                    throw new InsufficientAssetException();
+            }
+            ((EmptyLand) area).setHousesCount(((EmptyLand) area).getHotelsCount() + 1);
+            area.setBuyPrice((int) (area.getBuyPrice() + gameBoard.BUILD_HOUSE_COST));
+            area.setRentPrice((int) (area.getRentPrice() + gameBoard.ADD_HOUSE_RENT_ACCELERATION));
+            asset -= gameBoard.BUILD_HOUSE_COST;
+        }
     }
+
+
 
 }
