@@ -77,3 +77,9 @@ class BankruptcyException extends Exception{
         System.out.println("BankruptcyException");
     }
 }
+
+class UnbalancedBuildingsCountException extends Exception {
+    public UnbalancedBuildingsCountException() {
+        System.out.println("UnbalancedBuildingsCountException");
+    }
+}
