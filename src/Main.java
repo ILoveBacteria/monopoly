@@ -46,7 +46,7 @@ public class Main {
             Player playerTurn = game.getPlayers()[i];
             System.out.println(playerTurn.getName() + "'s turn:");
 
-            // Dice
+            // Roll dice
             int diceNumber = scanner.nextInt();
 
             if (diceNumber == 6) {
@@ -57,9 +57,7 @@ public class Main {
             if (diceNumber == 12) {
                 playerTurn.setLocation(13);
                 playerTurn.inJail = true;
-            }
-
-            else {
+            } else {
                 int newLocation = playerTurn.getLocation() + diceNumber;
                 if (newLocation > 24) {
                     playerTurn.setLocation(newLocation - 24);
@@ -77,6 +75,10 @@ public class Main {
             // Check chance card
             if (playerTurn.getLocation() == 24) {
                 ((ChanceCard) game.getGameBoard().getAreas()[24]).randomChoiceCard(playerTurn);
+            }
+            // Pay tax
+            else if (playerTurn.getLocation() == 17) {
+                playerTurn.payTax();
             }
 
             // Player commands
