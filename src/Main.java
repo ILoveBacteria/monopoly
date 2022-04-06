@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -79,7 +80,7 @@ public class Main {
             }
 
             // Player commands
-            while (true) {
+            outer: while (true) {
                 String inputCommand = scanner.next();
 
                 switch (inputCommand) {
@@ -136,6 +137,26 @@ public class Main {
                             e.printStackTrace();
                         }
                         break;
+                    case "rank":
+                        int rank = 0;
+                        int[] totalProperties = new int[game.getPlayers().length];
+                        for (int j = 0; j < game.getPlayers().length; j++) {
+                            totalProperties[j] = game.getPlayers()[j].totalProperty();
+                        }
+
+                        Arrays.sort(totalProperties);
+                        for (int j = 0; j < totalProperties.length; j++) {
+                            if (playerTurn.totalProperty() == totalProperties[j]) {
+                                rank = game.getPlayers().length - j;
+                            }
+                        }
+
+                        System.out.println(rank);
+                        break;
+                    case "exit":
+                        break outer;
+                    default:
+                        System.out.println("Invalid command!");
                 }
             }
         }
