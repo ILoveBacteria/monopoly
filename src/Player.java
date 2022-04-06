@@ -75,6 +75,11 @@ public class Player {
         }
     }
 
+    public void payTax() {
+        // Tax = 10%
+        asset = 90 * asset / 100;
+    }
+
     public void sell(Area area) throws Exception{
         {
             if (area.getOwner() != this)
