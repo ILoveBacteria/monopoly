@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Bank extends Area {
-    private ArrayList<Player> investors = new ArrayList<>();
-    private ArrayList<Integer> moneyInvested = new ArrayList<>();
+    private final ArrayList<Player> investors = new ArrayList<>();
+    private final ArrayList<Integer> moneyInvested = new ArrayList<>();
 
     public Bank(int areaNumber) {
         super(areaNumber, false);
@@ -10,7 +10,7 @@ public class Bank extends Area {
 
     public void addInvestor(Player player) {
         investors.add(player);
-        //moneyInvested.add(player.cash);
+        moneyInvested.add(player.getAsset() / 2);
     }
 
     public void removeInvestor(Player player) {
