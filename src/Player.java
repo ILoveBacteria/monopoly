@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Player {
     private String name;
-    private double asset = 1500;
+    private int asset = 1500;
     private ArrayList<Area> realEstates = new ArrayList<>();
     private int location = 1;
     public boolean inJail = false;
@@ -17,7 +17,7 @@ public class Player {
         return name;
     }
 
-    public double getAsset() {
+    public int getAsset() {
         return asset;
     }
 
@@ -48,7 +48,7 @@ public class Player {
         realEstates.add(area);
     }
 
-    public void collectRent(double rent) {
+    public void collectRent(int rent) {
         asset += rent;
     }
 
@@ -63,7 +63,7 @@ public class Player {
             }
             asset -= area.getRentPrice();
         } else {
-            Double balance = asset;
+            Integer balance = asset;
             Area[] realEstateArr = (Area[]) realEstates.toArray();
             for (int i = 0; i < realEstateArr.length; i++) {
                 balance += realEstateArr[i].getBuyPrice()/2;
