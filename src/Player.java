@@ -177,6 +177,16 @@ public class Player {
         }
     }
 
+    public int totalProperty() {
+        return asset + totalAreaBalance();
+    }
 
+    private int totalAreaBalance() {
+        int result = 0;
+        for (int i = 0; i < realEstates.size(); i++) {
+            result += realEstates.get(i).getBuyPrice();
+        }
 
+        return result;
+    }
 }
