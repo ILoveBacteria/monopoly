@@ -1,85 +1,85 @@
 public class Exceptions extends Exception{
 }
 
-class AreaWithoutRentException extends Exception{
-    public AreaWithoutRentException() {
-        System.out.println("AreaWithoutRentException");
+class AreaWithoutRentException extends Exception {
+    public AreaWithoutRentException(String message) {
+        super(message);
     }
 }
 
-class InsufficientAssetException extends Exception{
-    public InsufficientAssetException() {
-        System.out.println("InsufficientAssetException");
+class InsufficientAssetException extends Exception {
+    public InsufficientAssetException(String message) {
+        super(message);
     }
 }
 
-class UnPurchasableAreaException extends Exception{
-    public UnPurchasableAreaException() {
-        System.out.println("UnPurchasableAreaException");
+class UnPurchasableAreaException extends Exception {
+    public UnPurchasableAreaException(String message) {
+        super(message);
     }
 }
 
-class UnrelatedBuyerException extends Exception{
-    public UnrelatedBuyerException() {
-        System.out.println("UnrelatedBuyerException");
+class UnrelatedBuyerException extends Exception {
+    public UnrelatedBuyerException(String message) {
+        super(message);
     }
 }
 
-class UnrelatedUserException extends Exception{
-    public UnrelatedUserException() {
-        System.out.println("UnrelatedUserException");
+class UnrelatedUserException extends Exception {
+    public UnrelatedUserException(String message) {
+        super(message);
     }
 }
 
 class UnrelatedAreaException extends Exception {
-    UnrelatedAreaException() {
-        System.out.println("UnrelatedAreaException");
+    public UnrelatedAreaException(String message) {
+        super(message);
     }
 }
 
-class NotInJailException extends Exception{
-    public NotInJailException() {
-        System.out.println("NotInJailException");
+class NotInJailException extends Exception {
+    public NotInJailException(String message) {
+        super(message);
     }
 }
 
-class MaxHotelBuiltException extends Exception{
-    public MaxHotelBuiltException() {
-        System.out.println("MaxHotelBuiltException");
+class MaxHotelBuiltException extends Exception {
+    public MaxHotelBuiltException(String message) {
+        super(message);
     }
 }
-class MaxHousesBuiltException extends Exception{
-    public MaxHousesBuiltException() {
-        System.out.println("MaxHousesBuiltException");
-    }
-}
-
-class UnableToBuildException extends Exception{
-    public UnableToBuildException() {
-        System.out.println("UnableToBuildException");
+class MaxHousesBuiltException extends Exception {
+    public MaxHousesBuiltException(String message) {
+        super(message);
     }
 }
 
-class BoughtAreaException extends Exception{
-    BoughtAreaException() {
-        System.out.println("BoughtAreaException");
+class UnableToBuildException extends Exception {
+    public UnableToBuildException(String message) {
+        super(message);
+    }
+}
+
+class BoughtAreaException extends Exception {
+    public BoughtAreaException(String message) {
+        super(message);
     }
 }
 
 class MustSellRealEstatesException extends Exception {
-    public MustSellRealEstatesException() {
-        System.out.println("MustSellRealEstatesException");
+    public MustSellRealEstatesException(String message) {
+        super(message);
     }
 }
 
-class BankruptcyException extends Exception{
-    public BankruptcyException() {
-        System.out.println("BankruptcyException");
+class BankruptcyException extends Exception {
+    public BankruptcyException(String message) {
+        super(message);
     }
 }
 
 class UnbalancedBuildingsCountException extends Exception {
-    public UnbalancedBuildingsCountException() {
-        System.out.println("UnbalancedBuildingsCountException");
+    public UnbalancedBuildingsCountException(String message) {
+        super(message);
     }
 }
