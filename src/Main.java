@@ -3,8 +3,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+    private static Game game = null;
+
     public static void main(String[] args) {
-        Game game = null;
         Scanner scanner = new Scanner(System.in);
 
         // Create and start game commands
@@ -82,85 +83,93 @@ public class Main {
             }
 
             // Player commands
-            outer: while (true) {
-                String inputCommand = scanner.next();
-
-                switch (inputCommand) {
-                    case "index":
-                        int location = playerTurn.getLocation();
-                        System.out.println(location + ": " + game.getGameBoard().getAreas()[location].getClass().getSimpleName());
-                        break;
-                    case "property":
-                        System.out.println(playerTurn.printProperties());
-                        break;
-                    case "buy":
-                        try {
-                            playerTurn.buy(game.getGameBoard().getAreas()[playerTurn.getLocation()]);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "build":
-                        try {
-                            playerTurn.build(game.getGameBoard().getAreas()[playerTurn.getLocation()]);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "sell":
-                        int locationArea = scanner.nextInt();
-
-                        try {
-                            playerTurn.sell(game.getGameBoard().getAreas()[locationArea]);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "fly":
-                        int destinationArea = scanner.nextInt();
-
-                        try {
-                            playerTurn.fly(destinationArea);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "free":
-                        try {
-                            playerTurn.free();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "invest":
-                        try {
-                            playerTurn.invest();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case "rank":
-                        int rank = 0;
-                        int[] totalProperties = new int[game.getPlayers().length];
-                        for (int j = 0; j < game.getPlayers().length; j++) {
-                            totalProperties[j] = game.getPlayers()[j].totalProperty();
-                        }
-
-                        Arrays.sort(totalProperties);
-                        for (int j = 0; j < totalProperties.length; j++) {
-                            if (playerTurn.totalProperty() == totalProperties[j]) {
-                                rank = game.getPlayers().length - j;
-                            }
-                        }
-
-                        System.out.println(rank);
-                        break;
-                    case "exit":
-                        break outer;
-                    default:
-                        System.out.println("Invalid command!");
-                }
+            while (true) {
+                boolean isExit = commands(scanner, playerTurn);
+                if (isExit)
+                    break;
             }
         }
+    }
+
+    private static boolean commands(Scanner scanner, Player player) {
+        String inputCommand = scanner.next();
+
+        switch (inputCommand) {
+            case "index":
+                int location = player.getLocation();
+                System.out.println(location + ": " + game.getGameBoard().getAreas()[location].getClass().getSimpleName());
+                break;
+            case "property":
+                System.out.println(player.printProperties());
+                break;
+            case "buy":
+                try {
+                    player.buy(game.getGameBoard().getAreas()[player.getLocation()]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "build":
+                try {
+                    player.build(game.getGameBoard().getAreas()[player.getLocation()]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "sell":
+                int locationArea = scanner.nextInt();
+
+                try {
+                    player.sell(game.getGameBoard().getAreas()[locationArea]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "fly":
+                int destinationArea = scanner.nextInt();
+
+                try {
+                    player.fly(destinationArea);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "free":
+                try {
+                    player.free();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "invest":
+                try {
+                    player.invest();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "rank":
+                int rank = 0;
+                int[] totalProperties = new int[game.getPlayers().length];
+                for (int j = 0; j < game.getPlayers().length; j++) {
+                    totalProperties[j] = game.getPlayers()[j].totalProperty();
+                }
+
+                Arrays.sort(totalProperties);
+                for (int j = 0; j < totalProperties.length; j++) {
+                    if (player.totalProperty() == totalProperties[j]) {
+                        rank = game.getPlayers().length - j;
+                    }
+                }
+
+                System.out.println(rank);
+                break;
+            case "exit":
+                return true;
+            default:
+                System.out.println("Invalid command!");
+        }
+
+        return false;
     }
 }
