@@ -18,16 +18,20 @@ public class ChanceCard extends Area {
         switch (new Random().nextInt(7) + 1) {
             case COLLECT_200:
                 player.collectRent(200);
+                System.out.println("You earned 200$");
                 break;
             case GO_IN_PRISON:
                 player.setLocation(13);
                 player.inJail = true;
+                System.out.println("You were transferred to the prison area");
                 break;
             case PAY_TAX:
                 player.payTax();
+                System.out.println("You taxed ten percent of your money");
                 break;
             case GO_FORWARD_3:
                 player.setLocation(player.getLocation() + 3);
+                System.out.println("You went three areas forward");
                 break;
             case OPPORTUNITY_FREEDOM:
                 break;
