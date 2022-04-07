@@ -67,10 +67,20 @@ public class Main {
                 }
             }
 
-            try {
-                playerTurn.payRent(game.getGameBoard().getAreas()[playerTurn.getLocation()]);
-            } catch (Exception e) {
-                e.printStackTrace();
+            // Pay rent
+            while (true) {
+                try {
+                    playerTurn.payRent(game.getGameBoard().getAreas()[playerTurn.getLocation()]);
+                    System.out.println("Payed: " +
+                            game.getGameBoard().getAreas()[playerTurn.getLocation()].getRentPrice() + "$");
+                    break;
+                } catch (MustSellRealEstatesException e) {
+                    System.out.println(e.getMessage());
+                    commands(scanner, playerTurn);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage()); // Not yet handling the bankruptcy
+                    break;
+                }
             }
 
             // Check chance card
