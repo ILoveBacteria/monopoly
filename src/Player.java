@@ -5,6 +5,7 @@ public class Player {
     private int asset = 1500;
     private ArrayList<Area> realEstates = new ArrayList<>();
     private int location = 1;
+    public boolean bankruptcy = false;
     public boolean inJail = false;
     GameBoard gameBoard;
     Bank bank;

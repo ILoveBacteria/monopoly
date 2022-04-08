@@ -21,6 +21,10 @@ public class Main {
             }
 
             Player playerTurn = game.getPlayers()[i];
+            if (playerTurn.bankruptcy) {
+                continue;
+            }
+
             System.out.println(playerTurn.getName() + "'s turn");
             System.out.print("Dice Number: ");
 
@@ -60,8 +64,12 @@ public class Main {
             } catch (MustSellRealEstatesException e) {
                 System.out.println(e.getMessage());
                 commands(scanner, player);
+            } catch (BankruptcyException e) {
+                System.out.println(e.getMessage());
+                player.bankruptcy = true;
+                break;
             } catch (Exception e) {
-                System.out.println(e.getMessage()); // Not yet handling the bankruptcy
+                System.out.println(e.getMessage());
                 break;
             }
         }
