@@ -35,6 +35,11 @@ public class Main {
             else if (playerTurn.getLocation() == 17) {
                 playerTurn.payTax();
             }
+            // Collect prize
+            else if (playerTurn.getLocation() == 6) {
+                playerTurn.collectRent(200);
+                System.out.println("You earned 200$");
+            }
 
             // Player commands
             while (true) {
