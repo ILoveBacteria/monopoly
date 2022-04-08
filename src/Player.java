@@ -64,15 +64,11 @@ public class Player {
             }
             asset -= area.getRentPrice();
         } else {
-            Integer balance = asset;
-            Area[] realEstateArr = (Area[]) realEstates.toArray();
-            for (int i = 0; i < realEstateArr.length; i++) {
-                balance += realEstateArr[i].getBuyPrice()/2;
-                if (balance > area.getRentPrice()) {
-                    throw new MustSellRealEstatesException("Money is not enough. You have to sell one of your lands!");
-                }
-                throw new BankruptcyException("You went bankrupt!");
+            int balance = asset + (totalAreaBalance() / 2);
+            if (balance > area.getRentPrice()) {
+                throw new MustSellRealEstatesException("Money is not enough. You have to sell one of your lands!");
             }
+            throw new BankruptcyException("You went bankrupt!");
         }
     }
 
