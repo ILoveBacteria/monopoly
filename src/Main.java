@@ -8,31 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Create and start game commands
-        while (true) {
-            String inputCommand = scanner.next();
-
-            if (inputCommand.equals("create_game")) {
-                ArrayList<Player> playerArrayList = new ArrayList<>();
-
-                while (true) {
-                    String inputName = scanner.next();
-
-                    if (inputName.equals("start_game"))
-                        break;
-
-                    Player player = new Player(inputName);
-                    playerArrayList.add(player);
-                }
-
-                game = new Game(playerArrayList.toArray(new Player[0]));
-                break;
-            }
-
-            else if (inputCommand.equals("start_game")) {
-                System.out.println("no game created");
-            }
-        }
+        startNewGame(scanner);
 
         System.out.println("round " + game.getRound());
 
@@ -45,43 +21,11 @@ public class Main {
             }
 
             Player playerTurn = game.getPlayers()[i];
-            System.out.println(playerTurn.getName() + "'s turn:");
+            System.out.println(playerTurn.getName() + "'s turn");
+            System.out.print("Dice Number: ");
 
-            // Roll dice
-            int diceNumber = scanner.nextInt();
-
-            if (diceNumber == 6) {
-                int nextDiceNumber = scanner.nextInt();
-                diceNumber += nextDiceNumber;
-            }
-
-            if (diceNumber == 12) {
-                playerTurn.setLocation(13);
-                playerTurn.inJail = true;
-            } else {
-                int newLocation = playerTurn.getLocation() + diceNumber;
-                if (newLocation > 24) {
-                    playerTurn.setLocation(newLocation - 24);
-                } else {
-                    playerTurn.setLocation(newLocation);
-                }
-            }
-
-            // Pay rent
-            while (true) {
-                try {
-                    playerTurn.payRent(game.getGameBoard().getAreas()[playerTurn.getLocation()]);
-                    System.out.println("Payed: " +
-                            game.getGameBoard().getAreas()[playerTurn.getLocation()].getRentPrice() + "$");
-                    break;
-                } catch (MustSellRealEstatesException e) {
-                    System.out.println(e.getMessage());
-                    commands(scanner, playerTurn);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage()); // Not yet handling the bankruptcy
-                    break;
-                }
-            }
+            rollDice(scanner, playerTurn);
+            payRent(scanner, playerTurn);
 
             // Check chance card
             if (playerTurn.getLocation() == 24) {
@@ -97,6 +41,84 @@ public class Main {
                 boolean isExit = commands(scanner, playerTurn);
                 if (isExit)
                     break;
+            }
+        }
+    }
+
+    private static void payRent(Scanner scanner, Player player) {
+        while (true) {
+            try {
+                player.payRent(game.getGameBoard().getAreas()[player.getLocation()]);
+                System.out.println("Payed: " +
+                        game.getGameBoard().getAreas()[player.getLocation()].getRentPrice() + "$");
+                break;
+            } catch (MustSellRealEstatesException e) {
+                System.out.println(e.getMessage());
+                commands(scanner, player);
+            } catch (Exception e) {
+                System.out.println(e.getMessage()); // Not yet handling the bankruptcy
+                break;
+            }
+        }
+    }
+
+    private static void rollDice(Scanner scanner, Player player) {
+        int diceNumber = scanner.nextInt();
+
+        if (diceNumber == 6) {
+            int nextDiceNumber = scanner.nextInt();
+            diceNumber += nextDiceNumber;
+        }
+
+        if (diceNumber == 12) {
+            player.setLocation(13);
+            player.inJail = true;
+        } else {
+            int newLocation = player.getLocation() + diceNumber;
+            if (newLocation > 24) {
+                player.setLocation(newLocation - 24);
+            } else {
+                player.setLocation(newLocation);
+            }
+        }
+    }
+
+    private static void startNewGame(Scanner scanner) {
+        while (true) {
+            String inputCommand = scanner.next();
+
+            if (inputCommand.equals("create_game")) {
+                System.out.println("Type player names:");
+                ArrayList<Player> playerArrayList = new ArrayList<>();
+
+                while (true) {
+                    String inputName = scanner.next();
+
+                    if (inputName.equals("start_game")) {
+                        if (playerArrayList.size() >= 2) {
+                            break;
+                        } else {
+                            System.out.println("Not enough players!");
+                            continue;
+                        }
+                    }
+
+                    Player player = new Player(inputName);
+                    playerArrayList.add(player);
+                    if (playerArrayList.size() == 4)
+                        break;
+                }
+
+                game = new Game(playerArrayList.toArray(new Player[0]));
+                break;
+            }
+
+            else if (inputCommand.equals("start_game")) {
+                System.out.println("no game created");
+            }
+
+            else {
+                System.out.println("Invalid command!");
             }
         }
     }
