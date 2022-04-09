@@ -26,7 +26,6 @@ public class Main {
             }
 
             System.out.println(playerTurn.getName() + "'s turn");
-            System.out.print("Dice Number: ");
 
             rollDice(scanner, playerTurn);
             payRent(scanner, playerTurn);
@@ -76,14 +75,33 @@ public class Main {
     }
 
     private static void rollDice(Scanner scanner, Player player) {
-        int diceNumber = scanner.nextInt();
+        int diceNumber;
+
+        while (true) {
+            System.out.print("Dice Number: ");
+            diceNumber = scanner.nextInt();
+            if (diceNumber >= 1 && diceNumber <= 6) {
+                break;
+            } else {
+                System.out.println("Invalid dice number");
+            }
+        }
 
         if (diceNumber == 6) {
-            int nextDiceNumber = scanner.nextInt();
-            diceNumber += nextDiceNumber;
+            while (true) {
+                System.out.print("Dice Number: ");
+                int nextDiceNumber = scanner.nextInt();
+                if (nextDiceNumber >= 1 && nextDiceNumber <= 6) {
+                    diceNumber += nextDiceNumber;
+                    break;
+                } else {
+                    System.out.println("Invalid dice number");
+                }
+            }
         }
 
         if (diceNumber == 12) {
+            System.out.println("You was moved to prison area");
             player.setLocation(13);
             player.inJail = true;
         } else {
@@ -151,14 +169,14 @@ public class Main {
                 try {
                     player.buy(game.getGameBoard().getAreas()[player.getLocation()]);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "build":
                 try {
                     player.build(game.getGameBoard().getAreas()[player.getLocation()]);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "sell":
@@ -167,7 +185,7 @@ public class Main {
                 try {
                     player.sell(game.getGameBoard().getAreas()[locationArea]);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "fly":
@@ -176,21 +194,21 @@ public class Main {
                 try {
                     player.fly(destinationArea);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "free":
                 try {
                     player.free();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "invest":
                 try {
                     player.invest();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "rank":
