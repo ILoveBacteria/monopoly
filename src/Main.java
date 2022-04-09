@@ -169,14 +169,14 @@ public class Main {
                 try {
                     player.buy(game.getGameBoard().getAreas()[player.getLocation()]);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "build":
                 try {
                     player.build(game.getGameBoard().getAreas()[player.getLocation()]);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "sell":
@@ -185,7 +185,7 @@ public class Main {
                 try {
                     player.sell(game.getGameBoard().getAreas()[locationArea]);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "fly":
@@ -194,21 +194,21 @@ public class Main {
                 try {
                     player.fly(destinationArea);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "free":
                 try {
                     player.free();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "invest":
                 try {
                     player.invest();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
                 break;
             case "rank":
