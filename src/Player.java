@@ -1,3 +1,4 @@
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 
 public class Player {
@@ -7,7 +8,7 @@ public class Player {
     private int location = 1;
     public boolean bankruptcy = false;
     public boolean inJail = false;
-    GameBoard gameBoard;
+    GameBoard gameBoard = GameBoard.getInstance();
     Bank bank;
 
     public Player(String name) {
@@ -37,16 +38,21 @@ public class Player {
     public void buy(Area area) throws Exception {
         {
             if (!area.isPurchasable())
+                throw new UnPurchasableAreaException("This is not purchasable!");
+            if (area.getBuyPrice() == null)
                 throw new UnPurchasableAreaException("This area can not be purchased!");
             if (area.getOwner() != null)
                 throw new BoughtAreaException("This area has already been purchased!");
             if (area.getBuyPrice() > asset)
-                throw new InsufficientAssetException("Not enough money!");
+                throw new InsufficientAssetException();
         }
 
         area.setOwner(this);
         asset -= area.getBuyPrice();
         realEstates.add(area);
+        if (area instanceof EmptyLand) {
+            area.setRentPrice(gameBoard.EMPTY_LAND_RENT);
+        }
     }
 
     public void collectRent(int rent) {
@@ -56,7 +62,7 @@ public class Player {
     public void payRent(Area area) throws Exception {
         {
             if (area.getRentPrice() == null)
-                throw new AreaWithoutRentException("There is no need to pay rent in this place!");
+                throw new AreaWithoutRentException();
         }
 
         if (asset > area.getRentPrice()) {
@@ -81,7 +87,7 @@ public class Player {
     public void sell(Area area) throws Exception {
         {
             if (area.getOwner() != this)
-                throw new UnrelatedUserException("You do not own this land!");
+                throw new UnrelatedUserException();
         }
 
         this.asset += (area.getBuyPrice() / 2);
@@ -96,7 +102,7 @@ public class Player {
             if (nextLocation == location && !(nextLocation == gameBoard.AIRPORT_1 || nextLocation == gameBoard.AIRPORT_2 || nextLocation == gameBoard.AIRPORT_3))
                 throw new UnrelatedAreaException("The next place was chosen incorrectly!"); // can be replacedced
             if (asset < gameBoard.AIRPLANE_TICKET_COST)
-                throw new InsufficientAssetException("Not enough money!");
+                throw new InsufficientAssetException();
         }
 
         location = nextLocation;
@@ -110,7 +116,7 @@ public class Player {
             if (!inJail)
                 throw new NotInJailException("You are not a prisoner!");
             if (asset < gameBoard.RELEASE_FROM_JAIL_COST)
-                throw new InsufficientAssetException("Not enough money!");
+                throw new InsufficientAssetException();
         }
 
         inJail = false;
@@ -128,7 +134,7 @@ public class Player {
         String result = "";
         result += "Asset : " + asset + "$\n";
         result += "Real Estate : \n";
-        Area[] realEstatesArr = (Area[]) realEstates.toArray();
+        Area[] realEstatesArr =  realEstates.toArray(new Area[0]);
         for (int i = 0; i < realEstatesArr.length-1; i++)
             for  (int j = 0; j < realEstatesArr.length-i-1; j++)
                 if (realEstatesArr[j].getAreaNumber() > realEstatesArr[j+1].getAreaNumber()) {
@@ -137,7 +143,7 @@ public class Player {
                     realEstatesArr[j+1] = temp;
                 }
         for (int i = 0; i < realEstatesArr.length; i++) {
-            result += i + " - " + realEstatesArr[i] + "\n";
+            result += (i + 1) + " - " + realEstatesArr[i].getClass().getSimpleName() + "(" + realEstatesArr[i].getAreaNumber() + ")" + "\n";
         }
         return result;
     }
@@ -152,7 +158,7 @@ public class Player {
                 throw new UnableToBuildException("You cannot build again!");
         }
 
-        Area[] realEstateArr = (Area[]) realEstates.toArray();
+        Area[] realEstateArr = realEstates.toArray(new Area[0]);
         for (int i = 0; i < realEstateArr.length; i++) {
             if (area instanceof EmptyLand) {
                 if (((EmptyLand) area).getHousesCount() > ((EmptyLand) realEstateArr[i]).getHousesCount()) {
@@ -163,7 +169,7 @@ public class Player {
         if (((EmptyLand) area).getHousesCount() == 4) {
             {
                 if (asset < gameBoard.BUILD_HOTEL_COST)
-                    throw new InsufficientAssetException("Not enough money!");
+                    throw new InsufficientAssetException();
             }
             ((EmptyLand) area).setHotelsCount(1);
             ((EmptyLand) area).setHousesCount(0);
@@ -173,7 +179,7 @@ public class Player {
         } else {
             {
                 if (asset < gameBoard.BUILD_HOUSE_COST)
-                    throw new InsufficientAssetException("Not enough money!");
+                    throw new InsufficientAssetException();
             }
             ((EmptyLand) area).setHousesCount(((EmptyLand) area).getHousesCount() + 1);
             area.setBuyPrice((int) (area.getBuyPrice() + gameBoard.BUILD_HOUSE_COST));
