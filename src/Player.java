@@ -1,4 +1,3 @@
-import javax.print.DocFlavor;
 import java.util.ArrayList;
 
 public class Player {
@@ -134,7 +133,7 @@ public class Player {
     public String printProperties() {
         String result = "";
         result += "Asset : " + asset + "$\n";
-        result += "Real Estate : \n";
+        result += "Real Estates : \n";
         Area[] realEstatesArr =  realEstates.toArray(new Area[0]);
         for (int i = 0; i < realEstatesArr.length-1; i++)
             for  (int j = 0; j < realEstatesArr.length-i-1; j++)
@@ -145,6 +144,10 @@ public class Player {
                 }
         for (int i = 0; i < realEstatesArr.length; i++) {
             result += (i + 1) + " - " + realEstatesArr[i].getClass().getSimpleName() + "(" + realEstatesArr[i].getAreaNumber() + ")" + "\n";
+            if (realEstatesArr[i] instanceof EmptyLand) {
+                result += "   Houses Count : " + ((EmptyLand) realEstatesArr[i]).getHousesCount() + "\n";
+                result += "   Hotels Count : " + ((EmptyLand) realEstatesArr[i]).getHotelsCount() + "\n";
+            }
         }
         return result;
     }
