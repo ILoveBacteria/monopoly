@@ -8,14 +8,14 @@ public class GameBoard {
     public final int JAIL = 13;
     public final int BANK = 21;
 
-    public final double AIRPLANE_TICKET_COST = 50;
-    public final double RELEASE_FROM_JAIL_COST = 50;
-    public final double EMPTY_LAND_COST = 100;
-    public final double BUILD_HOUSE_COST = 150;
-    public final double BUILD_HOTEL_COST = 100;
-    public final double EMPTY_LAND_RENT = 50;
-    public final double ADD_HOUSE_RENT_ACCELERATION = 100;
-    public final double ADD_HOTEL_RENT_ACCELERATION = 150;
+    public final int AIRPLANE_TICKET_COST = 50;
+    public final int RELEASE_FROM_JAIL_COST = 50;
+    public final int EMPTY_LAND_COST = 100;
+    public final int BUILD_HOUSE_COST = 150;
+    public final int BUILD_HOTEL_COST = 100;
+    public final int EMPTY_LAND_RENT = 50;
+    public final int ADD_HOUSE_RENT_ACCELERATION = 100;
+    public final int ADD_HOTEL_RENT_ACCELERATION = 150;
 
 
 
