@@ -44,7 +44,7 @@ public class Player {
             if (area.getOwner() != null)
                 throw new BoughtAreaException("This area has already been purchased!");
             if (area.getBuyPrice() > asset)
-                throw new InsufficientAssetException();
+                throw new InsufficientAssetException("Not enough money!");
         }
 
         area.setOwner(this);
@@ -62,7 +62,7 @@ public class Player {
     public void payRent(Area area) throws Exception {
         {
             if (area.getRentPrice() == null)
-                throw new AreaWithoutRentException();
+                throw new AreaWithoutRentException("There is no need to pay rent in this place!");
         }
 
         if (asset > area.getRentPrice()) {
@@ -87,7 +87,7 @@ public class Player {
     public void sell(Area area) throws Exception {
         {
             if (area.getOwner() != this)
-                throw new UnrelatedUserException();
+                throw new UnrelatedUserException("You do not own this land!");
         }
 
         this.asset += (area.getBuyPrice() / 2);
@@ -102,7 +102,8 @@ public class Player {
             if (nextLocation == location && !(nextLocation == gameBoard.AIRPORT_1 || nextLocation == gameBoard.AIRPORT_2 || nextLocation == gameBoard.AIRPORT_3))
                 throw new UnrelatedAreaException("The next place was chosen incorrectly!"); // can be replacedced
             if (asset < gameBoard.AIRPLANE_TICKET_COST)
-                throw new InsufficientAssetException();
+                if (asset < gameBoard.AIRPLANE_TICKET_COST)
+                    throw new InsufficientAssetException("Not enough money!");
         }
 
         location = nextLocation;
@@ -116,7 +117,7 @@ public class Player {
             if (!inJail)
                 throw new NotInJailException("You are not a prisoner!");
             if (asset < gameBoard.RELEASE_FROM_JAIL_COST)
-                throw new InsufficientAssetException();
+                throw new InsufficientAssetException("Not enough money!");
         }
 
         inJail = false;
@@ -169,7 +170,7 @@ public class Player {
         if (((EmptyLand) area).getHousesCount() == 4) {
             {
                 if (asset < gameBoard.BUILD_HOTEL_COST)
-                    throw new InsufficientAssetException();
+                    throw new InsufficientAssetException("Not enough money!");
             }
             ((EmptyLand) area).setHotelsCount(1);
             ((EmptyLand) area).setHousesCount(0);
@@ -179,7 +180,7 @@ public class Player {
         } else {
             {
                 if (asset < gameBoard.BUILD_HOUSE_COST)
-                    throw new InsufficientAssetException();
+                    throw new InsufficientAssetException("Not enough money!");
             }
             ((EmptyLand) area).setHousesCount(((EmptyLand) area).getHousesCount() + 1);
             area.setBuyPrice((int) (area.getBuyPrice() + gameBoard.BUILD_HOUSE_COST));
