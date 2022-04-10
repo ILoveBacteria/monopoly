@@ -71,7 +71,7 @@ public class Player {
 
     public void payRent(Area area) throws Exception {
         {
-            if (area.getRentPrice() == null)
+            if (area.getRentPrice() == null || (area instanceof EmptyLand && area.getOwner() == null))
                 throw new AreaWithoutRentException("There is no need to pay rent in this place!");
         }
 
