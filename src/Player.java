@@ -41,10 +41,6 @@ public class Player {
         this.realEstates = realEstates;
     }
 
-    public boolean isInJail() {
-        return inJail;
-    }
-
     public void buy(Area area) throws Exception {
         {
             if (!area.isPurchasable())
@@ -62,6 +58,20 @@ public class Player {
         realEstates.add(area);
         if (area instanceof EmptyLand) {
             area.setRentPrice(gameBoard.EMPTY_LAND_RENT);
+        }
+        if (area instanceof Cinema) {
+            int cinemasCount = 0;
+            Area[] realEstatesArr =  realEstates.toArray(new Area[0]);
+            for (int i = 0; i < realEstatesArr.length; i++) {
+                if (realEstatesArr[i] instanceof Cinema) {
+                    cinemasCount++;
+                }
+            }
+            for (int i = 0; i < realEstatesArr.length; i++) {
+                if (realEstatesArr[i] instanceof Cinema) {
+                    realEstatesArr[i].setRentPrice((int) (Math.pow(2 , cinemasCount-1) * gameBoard.CINEMA_TICKET_COST));
+                }
+            }
         }
     }
 
