@@ -46,7 +46,7 @@ public class Main {
 
             // Check chance card
             if (playerTurn.getLocation() == 24) {
-                ((ChanceCard) game.getGameBoard().getAreas()[24]).randomChoiceCard(playerTurn);
+                ((ChanceCard) game.getGameBoard().getAreas()[24]).randomChoiceCard(playerTurn, game.getPlayers());
             }
             // Pay tax
             else if (playerTurn.getLocation() == 17) {
