@@ -50,7 +50,8 @@ public class Main {
             }
             // Pay tax
             else if (playerTurn.getLocation() == 17) {
-                playerTurn.payTax();
+                int tax = playerTurn.payTax();
+                System.out.println("Payed: " + tax + "$");
             }
             // Collect prize
             else if (playerTurn.getLocation() == 6) {
@@ -219,7 +220,7 @@ public class Main {
 
                 try {
                     player.fly(destinationArea);
-                    System.out.println("You fly successfully to" + destinationArea + "area");
+                    System.out.println("You fly successfully to " + destinationArea + " area");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }

@@ -89,9 +89,11 @@ public class Player {
         }
     }
 
-    public void payTax() {
+    public int payTax() {
         // Tax = 10%
-        asset = 90 * asset / 100;
+        int tax = 10 * asset / 100;
+        asset -= tax;
+        return tax;
     }
 
     public void sell(Area area) throws Exception {
