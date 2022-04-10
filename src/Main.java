@@ -27,7 +27,11 @@ public class Main {
 
             System.out.println(playerTurn.getName() + "'s turn");
 
-            rollDice(scanner, playerTurn);
+            if (playerTurn.inJail) {
+                System.out.println("You cannot roll dice until you are in prison");
+            } else {
+                rollDice(scanner, playerTurn);
+            }
             payRent(scanner, playerTurn);
 
             // Check chance card
