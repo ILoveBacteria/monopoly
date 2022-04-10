@@ -8,7 +8,6 @@ public class Player {
     public boolean bankruptcy = false;
     public boolean inJail = false;
     GameBoard gameBoard = GameBoard.getInstance();
-    Bank bank;
 
     public Player(String name) {
         this.name = name;
@@ -138,7 +137,7 @@ public class Player {
     public void invest() throws Exception {
         if (gameBoard.areas[location].getAreaNumber() != gameBoard.BANK)
             throw new UnrelatedAreaException("You are not in bank area!");
-        bank.addInvestor(this);
+        ((Bank) gameBoard.getAreas()[gameBoard.BANK]).addInvestor(this);
         asset /= 2;
     }
 
