@@ -17,6 +17,16 @@ public class Main {
             if (i == game.getPlayers().length) {
                 i = 0;
                 game.goNextRound();
+
+                System.out.println("Starting round " + game.getRound());
+                System.out.println("The banker can swap the assets:");
+                // Banker commands
+                while (true) {
+                    boolean isExit = bankerCommands(scanner);
+                    if (isExit)
+                        break;
+                }
+
                 System.out.println("round " + game.getRound());
             }
 
@@ -50,7 +60,7 @@ public class Main {
 
             // Player commands
             while (true) {
-                boolean isExit = commands(scanner, playerTurn);
+                boolean isExit = playerCommands(scanner, playerTurn);
                 if (isExit)
                     break;
             }
@@ -74,7 +84,7 @@ public class Main {
                 break;
             } catch (MustSellRealEstatesException e) {
                 System.out.println(e.getMessage());
-                commands(scanner, player);
+                playerCommands(scanner, player);
             } catch (BankruptcyException e) {
                 System.out.println(e.getMessage());
                 player.bankruptcy = true;
@@ -166,7 +176,7 @@ public class Main {
         }
     }
 
-    private static boolean commands(Scanner scanner, Player player) {
+    private static boolean playerCommands(Scanner scanner, Player player) {
         String inputCommand = scanner.next();
 
         switch (inputCommand) {
@@ -230,6 +240,9 @@ public class Main {
                     System.out.println(e.getMessage());
                 }
                 break;
+            case "swap_wealth":
+                System.out.println("Cannot swap in the meantime");
+                break;
             case "rank":
                 int rank = 0;
                 int[] totalProperties = new int[game.getPlayers().length];
@@ -253,6 +266,45 @@ public class Main {
         }
 
         return false;
+    }
+
+    private static boolean bankerCommands(Scanner scanner) {
+        String inputCommand = scanner.next();
+
+        switch (inputCommand) {
+            case "swap_wealth":
+                String playerName1 = scanner.next();
+                String playerName2 = scanner.next();
+
+                try {
+                    Player player1 = findPlayerByName(playerName1);
+                    Player player2 = findPlayerByName(playerName2);
+
+                    if (player1.bankruptcy || player2.bankruptcy)
+                        throw new Exception("A player is bankrupt!");
+
+                    Bank.swapWealth(player1, player2);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+                break;
+            case "exit":
+                return true;
+            default:
+                System.out.println("Invalid command!");
+        }
+
+        return false;
+    }
+
+    private static Player findPlayerByName(String name) throws Exception {
+        for (int i = 0; i < game.getPlayers().length; i++) {
+            if (name.equals(game.getPlayers()[i].getName()))
+                return game.getPlayers()[i];
+        }
+
+        throw new Exception("Cannot find " + name + " user!");
     }
 
     private static boolean continueGame() {
