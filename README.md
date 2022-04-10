@@ -16,3 +16,7 @@ Clone the repository:
 ```shell
 git clone https://github.com/ILoveBacteria/monopoly.git
 ```
+
+## Last Release
+
+You can download and run the last release from [here](https://github.com/ILoveBacteria/monopoly/releases)
