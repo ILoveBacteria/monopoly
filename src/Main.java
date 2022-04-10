@@ -13,7 +13,7 @@ public class Main {
         System.out.println("round " + game.getRound());
 
         // Player turn
-        for (int i = 0;; i++) {
+        for (int i = 0; continueGame(); i++) {
             if (i == game.getPlayers().length) {
                 i = 0;
                 game.goNextRound();
@@ -54,6 +54,14 @@ public class Main {
                 if (isExit)
                     break;
             }
+        }
+
+        for (int i = 0; i < game.getPlayers().length; i++) {
+            Player player = game.getPlayers()[i];
+            if (player.bankruptcy)
+                System.out.println(player.getName() + " lose the game");
+            else
+                System.out.println(player.getName() + " won the game");
         }
     }
 
@@ -245,5 +253,16 @@ public class Main {
         }
 
         return false;
+    }
+
+    private static boolean continueGame() {
+        int countBankruptPlayers = 0;
+
+        for (int i = 0; i < game.getPlayers().length; i++) {
+            if (game.getPlayers()[i].bankruptcy)
+                ++countBankruptPlayers;
+        }
+
+        return game.getPlayers().length - countBankruptPlayers != 1;
     }
 }
