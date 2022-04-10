@@ -168,6 +168,7 @@ public class Main {
             case "buy":
                 try {
                     player.buy(game.getGameBoard().getAreas()[player.getLocation()]);
+                    System.out.println("You buy successfully");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -175,6 +176,7 @@ public class Main {
             case "build":
                 try {
                     player.build(game.getGameBoard().getAreas()[player.getLocation()]);
+                    System.out.println("You build successfully");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -184,6 +186,8 @@ public class Main {
 
                 try {
                     player.sell(game.getGameBoard().getAreas()[locationArea]);
+                    System.out.println("You sell successfully");
+                    System.out.println("Earned " + game.getGameBoard().getAreas()[locationArea].getBuyPrice() / 2 + "$");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -193,6 +197,7 @@ public class Main {
 
                 try {
                     player.fly(destinationArea);
+                    System.out.println("You fly successfully to" + destinationArea + "area");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -200,6 +205,7 @@ public class Main {
             case "free":
                 try {
                     player.free();
+                    System.out.println("You free successfully");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -207,6 +213,7 @@ public class Main {
             case "invest":
                 try {
                     player.invest();
+                    System.out.println("You invest successfully");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
