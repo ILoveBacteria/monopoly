@@ -111,8 +111,8 @@ public class Player {
         {
             if (!(gameBoard.areas[location] instanceof Airport))
                 throw new UnrelatedAreaException("You are not in an airport!");
-            if (nextLocation == location && !(nextLocation == gameBoard.AIRPORT_1 || nextLocation == gameBoard.AIRPORT_2 || nextLocation == gameBoard.AIRPORT_3))
-                throw new UnrelatedAreaException("The next place was chosen incorrectly!"); // can be replacedced
+            if (nextLocation == location || !(nextLocation == gameBoard.AIRPORT_1 || nextLocation == gameBoard.AIRPORT_2 || nextLocation == gameBoard.AIRPORT_3))
+                throw new UnrelatedAreaException("The next place was chosen incorrectly!");
             if (asset < gameBoard.AIRPLANE_TICKET_COST)
                 if (asset < gameBoard.AIRPLANE_TICKET_COST)
                     throw new InsufficientAssetException("Not enough money!");
