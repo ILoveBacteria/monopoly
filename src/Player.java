@@ -30,6 +30,18 @@ public class Player {
         this.location = location;
     }
 
+    public void setAsset(int asset) {
+        this.asset = asset;
+    }
+
+    public ArrayList<Area> getRealEstates() {
+        return realEstates;
+    }
+
+    public void setRealEstates(ArrayList<Area> realEstates) {
+        this.realEstates = realEstates;
+    }
+
     public boolean isInJail() {
         return inJail;
     }
