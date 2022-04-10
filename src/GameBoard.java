@@ -16,6 +16,7 @@ public class GameBoard {
     public final int EMPTY_LAND_RENT = 50;
     public final int ADD_HOUSE_RENT_ACCELERATION = 100;
     public final int ADD_HOTEL_RENT_ACCELERATION = 150;
+    public final int CINEMA_TICKET_COST = 25;
 
 
 
