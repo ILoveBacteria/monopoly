@@ -58,6 +58,14 @@ public class Main {
                 playerTurn.collectRent(200);
                 System.out.println("You earned 200$");
             }
+            // Collect money after invest
+            else if (playerTurn.getLocation() == 21) {
+                Bank bank = (Bank) game.getGameBoard().getAreas()[21];
+                if (bank.containPlayer(playerTurn)) {
+                    bank.collectMoney(playerTurn);
+                    bank.removeInvestor(playerTurn);
+                }
+            }
 
             // Player commands
             while (true) {

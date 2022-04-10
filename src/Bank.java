@@ -14,6 +14,15 @@ public class Bank extends Area {
         moneyInvested.add(player.getAsset() / 2);
     }
 
+    public void collectMoney(Player player) {
+        int index = investors.indexOf(player);
+        player.collectRent(moneyInvested.get(index) * 2);
+    }
+
+    public boolean containPlayer(Player player) {
+        return investors.contains(player);
+    }
+
     public void removeInvestor(Player player) {
         int index = investors.indexOf(player);
         moneyInvested.remove(index);
